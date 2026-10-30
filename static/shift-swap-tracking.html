@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shift-Swap Tracking — No-Code Automation for Shift Workers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Shift-Swap Tracking</h1>
+  <div class="credit">Published by <strong>Asdale Dynamics, LLC</strong> (Indiana, formed October 2026) &mdash; credit to Dylan Asdale, registered nurse turned AI author and founder of Asdale Dynamics, LLC.</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="safety.html">Safety first</a>
+    <a href="email-rules.html">Email rules</a>
+    <a href="calendar-reminders.html">Calendar reminders</a>
+    <a href="file-organization.html">File organization</a>
+    <a href="planner.html">Printable planner</a>
+  </nav>
+</header>
+
+<main>
+<h2>Stop forgetting who owes whom</h2>
+<p>Shift swaps happen on paper, in texts, and from memory &mdash; until someone forgets who owes whom. This guide shows you a tiny local tracker that keeps swaps in a plain CSV file on your computer (<code>swaps.csv</code>), plus what to write down for every swap so nothing slips through the cracks.</p>
+
+<h3>What to record for every swap</h3>
+<table>
+<thead>
+<tr><th>Field</th><th>What it means</th></tr>
+</thead>
+<tbody>
+<tr><td>My date</td><td>The date of your shift being swapped</td></tr>
+<tr><td>Their date</td><td>The date of their shift being swapped</td></tr>
+<tr><td>Coworker</td><td>Who you're swapping with</td></tr>
+<tr><td>Status</td><td><code>pending</code>, <code>approved</code>, <code>denied</code>, or <code>done</code></td></tr>
+<tr><td>Approved by</td><td>Manager or charge nurse who signed off (if required)</td></tr>
+<tr><td>Notes</td><td>Unit, shift type (days/evenings/nights), any conditions</td></tr>
+</tbody>
+</table>
+
+<p class="small">Never put patient names, room numbers, or any health information in the swap tracker. It's for dates and names only.</p>
+
+<h2>Local tracker script (<code>scripts/shift_swap_tracker.py</code>)</h2>
+<p>The script keeps swaps in <code>swaps.csv</code> (comma-separated, easy to open in a spreadsheet) on your computer. Nothing is uploaded, and nothing is hardcoded.</p>
+
+<p>Add a swap:</p>
+<pre><code>python3 scripts/shift_swap_tracker.py add "2026-11-07" "2026-11-10" Maya pending "Charge nurse approved"</code></pre>
+
+<p>List swaps:</p>
+<pre><code>python3 scripts/shift_swap_tracker.py list</code></pre>
+
+<p>List only swaps needing attention (pending or upcoming within N days):</p>
+<pre><code>python3 scripts/shift_swap_tracker.py upcoming --within 7</code></pre>
+
+<p>Mark a swap approved or done:</p>
+<pre><code>python3 scripts/shift_swap_tracker.py status 1 approved
+python3 scripts/shift_swap_tracker.py status 1 done</code></pre>
+
+<p>The number (<code>1</code>, <code>2</code>, ...) is the row number from <code>list</code>.</p>
+
+<p>Export to a spreadsheet-friendly CSV:</p>
+<pre><code>python3 scripts/shift_swap_tracker.py export swaps-backup.csv</code></pre>
+
+<p>Every command defaults to a preview where it makes sense; nothing is changed until you confirm. <code>swaps.csv</code> lives on your computer &mdash; it's ignored by git and never meant to be committed.</p>
+
+<h3>Example tracker</h3>
+<pre><code>my_date,their_date,coworker,status,approved_by,notes
+2026-11-07,2026-11-10,Maya,pending,Charge nurse,Nights, unit 4B
+2026-11-14,2026-11-08,Jamal,approved,J. Miller,Evenings for days</code></pre>
+
+<h3>Tips</h3>
+<ul>
+<li>Add swaps as soon as they're discussed, while details are fresh.</li>
+<li>Review <code>upcoming --within 7</code> at the start of each week so approvals don't lapse.</li>
+<li>Keep <code>swaps.csv</code> backed up however you back up your other files &mdash; it's just a text file.</li>
+<li>Shift-swap tracking is an organizational tool, not a scheduling system. Your unit's official schedule and approval process always win.</li>
+</ul>
+
+<p><a href="index.html">&larr; Back to home</a></p>
+</main>
+
+<footer>
+No-Code Automation for Shift Workers &mdash; Asdale Dynamics, LLC. Local-first, tested, no secrets.<br>
+MIT License. Copyright (c) 2026 Asdale Dynamics, LLC.
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Organization — No-Code Automation for Shift Workers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>File Organization</h1>
+  <div class="credit">Published by <strong>Asdale Dynamics, LLC</strong> (Indiana, formed October 2026) &mdash; credit to Dylan Asdale, registered nurse turned AI author and founder of Asdale Dynamics, LLC.</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="safety.html">Safety first</a>
+    <a href="email-rules.html">Email rules</a>
+    <a href="calendar-reminders.html">Calendar reminders</a>
+    <a href="shift-swap-tracking.html">Shift-swap tracking</a>
+    <a href="planner.html">Printable planner</a>
+  </nav>
+</header>
+
+<main>
+<h2>Tidy up your shift paperwork</h2>
+<p>Shift work creates a lot of paper: shift schedules, pay stubs, time-off requests, certifications, license renewals, CE credits, immunization records, tax forms. This guide shows you how to sort a messy folder into tidy subfolders &mdash; by hand or with a tiny script &mdash; so you can find what you need when you need it.</p>
+
+<h3>Suggested folders for shift paperwork</h3>
+<ul>
+<li><code>Schedules/</code> &mdash; rosters, shift bids, time-off requests</li>
+<li><code>Pay/</code> &mdash; pay stubs, direct deposit notices</li>
+<li><code>Certs/</code> &mdash; certifications, license renewals, CE credits</li>
+<li><code>Health/</code> &mdash; immunization records, physicals (nothing patient-related)</li>
+<li><code>Taxes/</code> &mdash; W-2s, quarterly estimates, receipts you might deduct</li>
+<li><code>Archive/</code> &mdash; anything older than a year</li>
+</ul>
+
+<p>Rename files as you file them: <code>2026-11-paystub.pdf</code> beats <code>scan_042.pdf</code>. A little naming goes a long way on irregular schedules.</p>
+
+<h2>Local organizer script (<code>scripts/organize_files.py</code>)</h2>
+<p>There's a small script that sorts a folder into type-based subfolders based on file extension. It defaults to a dry-run: it prints what it would do without moving anything.</p>
+
+<p>Run it on a test copy first:</p>
+<pre><code>python3 scripts/organize_files.py ~/Downloads</code></pre>
+
+<p>Preview shows what would move. When you're sure:</p>
+<pre><code>python3 scripts/organize_files.py ~/Downloads --apply</code></pre>
+
+<p>It skips the destination folders themselves and avoids overwriting files by adding a number if a name already exists. Standard library only &mdash; nothing to install, nothing uploaded.</p>
+
+<h3>Troubleshooting</h3>
+<ul>
+<li><strong>Nothing moved:</strong> You ran the preview. Add <code>--apply</code> to actually move files, and test on a copy first.</li>
+<li><strong>File already exists:</strong> The script adds <code>-1</code>, <code>-2</code>, etc. to avoid overwriting. Check the destination folder.</li>
+<li><strong>Destination folders skipped:</strong> The organizer won't sort into its own output folders, so running it twice on the same folder is safe.</li>
+</ul>
+
+<p class="small">File organization is an organizational tool, not financial or medical advice. Keep originals of anything legally important (license, certifications, tax forms) somewhere safe &mdash; the script moves files within a folder you point it at, and you should test on copies first.</p>
+
+<p><a href="index.html">&larr; Back to home</a></p>
+</main>
+
+<footer>
+No-Code Automation for Shift Workers &mdash; Asdale Dynamics, LLC. Local-first, tested, no secrets.<br>
+MIT License. Copyright (c) 2026 Asdale Dynamics, LLC.
+</footer>
+</div>
+</body>
+</html>

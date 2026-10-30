@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar Reminders — No-Code Automation for Shift Workers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Calendar Reminders</h1>
+  <div class="credit">Published by <strong>Asdale Dynamics, LLC</strong> (Indiana, formed October 2026) &mdash; credit to Dylan Asdale, registered nurse turned AI author and founder of Asdale Dynamics, LLC.</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="safety.html">Safety first</a>
+    <a href="email-rules.html">Email rules</a>
+    <a href="shift-swap-tracking.html">Shift-swap tracking</a>
+    <a href="file-organization.html">File organization</a>
+    <a href="planner.html">Printable planner</a>
+  </nav>
+</header>
+
+<main>
+<h2>Never miss a shift start, appointment, or bill</h2>
+<p>Use whatever calendar you already use (phone, Google Calendar, Outlook, Apple Calendar). Set reminders relative to your shift, not to a fixed time of day:</p>
+
+<ul>
+<li><strong>Before a night shift:</strong> "Sleep before night shift" &mdash; 2 hours before shift start</li>
+<li><strong>After a night shift:</strong> "Sleep in / no alarms" &mdash; the day after your shift ends</li>
+<li><strong>Before rotating onto nights:</strong> "Adjust bedtime" &mdash; 3 days before the rotation starts</li>
+<li><strong>Bills:</strong> due date minus 3 days, so you pay before payday lands</li>
+<li><strong>Shift swap reply by:</strong> the day your coworker asked for an answer</li>
+</ul>
+
+<p>Set recurring reminders for things that repeat each shift cycle (payday, license renewal check, CE credits due).</p>
+
+<h2>Local reminders script (<code>scripts/calendar_reminders.py</code>)</h2>
+<p>If you prefer a plain-text list that lives on your computer, there's a small script for it. It reads <code>reminders.txt</code> (one line per reminder) and prints what's due today, upcoming within N days, or overdue.</p>
+
+<p>Each line looks like:</p>
+<pre><code>name | due date (YYYY-MM-DD) | message</code></pre>
+
+<pre><code>Electric bill | 2026-11-05 | Pay the electric bill
+Night shift starts | 2026-11-07 | Sleep by 8 AM tomorrow
+Shift swap reply due | 2026-11-03 | Reply to Maya about the 11th</code></pre>
+
+<p>Run it:</p>
+<pre><code>python3 scripts/calendar_reminders.py reminders.txt</code></pre>
+
+<p>It defaults to a dry-run: prints each reminder and a <code>mailto:</code> link you can click to email yourself &mdash; it sends nothing. With <code>--apply</code> and SMTP environment variables set in your own shell (never in this file), it can send for real:</p>
+<pre><code>python3 scripts/calendar_reminders.py reminders.txt --within 14 --apply</code></pre>
+
+<p>Options:</p>
+<ul>
+<li><code>--within N</code> &mdash; report reminders due within N days (default 7)</li>
+<li><code>--apply</code> &mdash; send via SMTP using <code>SMTP_HOST</code>, <code>SMTP_PORT</code>, <code>SMTP_USER</code>, <code>SMTP_PASS</code>, <code>FROM_EMAIL</code>, <code>TO_EMAIL</code> environment variables</li>
+<li><code>--dry-run</code> (default) &mdash; print only, send nothing</li>
+</ul>
+
+<div class="rule"><b>Shift-work tip:</b> Put reminders in <code>reminders.txt</code> keyed to your roster rather than calendar dates when you can: "the Monday after my last night shift" works better than a date that changes every rotation. Update the file when your schedule comes out.</div>
+
+<h3>Troubleshooting</h3>
+<ul>
+<li><strong>Nothing shows up:</strong> Check the date format is <code>YYYY-MM-DD</code> and that lines have three <code>|</code>-separated parts. Malformed lines are skipped with a warning.</li>
+<li><strong>mailto: link doesn't open anything:</strong> Your computer needs a default email app set. You can also copy the reminder text and paste it into your email app yourself.</li>
+<li><strong>--apply sends nothing:</strong> SMTP environment variables must be set in your shell. Nothing is hardcoded, and no credentials are stored in this project.</li>
+</ul>
+
+<p class="small">Calendar reminders are an organizational tool, not medical advice. If sleep or fatigue is a concern, talk to a qualified clinician.</p>
+
+<p><a href="index.html">&larr; Back to home</a></p>
+</main>
+
+<footer>
+No-Code Automation for Shift Workers &mdash; Asdale Dynamics, LLC. Local-first, tested, no secrets.<br>
+MIT License. Copyright (c) 2026 Asdale Dynamics, LLC.
+</footer>
+</div>
+</body>
+</html>
