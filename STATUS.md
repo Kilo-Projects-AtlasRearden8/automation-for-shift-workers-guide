@@ -11,7 +11,9 @@ printable shift-work automation planner.
 
 **Project contents**
 
-- `README.md` — overview, how to use, credits Asdale Dynamics, LLC.
+- `README.md` — overview, what you need, what's inside, a complete shift-worker
+  scenario walkthrough tying all four topics together, how to use, privacy
+  promise, about Asdale Dynamics, LLC, license; credits Asdale Dynamics, LLC.
 - `LICENSE` — MIT License, copyright line exactly
   `Copyright (c) 2026 Asdale Dynamics, LLC`.
 - `docs/` — beginner manual in Markdown:
