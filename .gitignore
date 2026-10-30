@@ -3,7 +3,7 @@
 .env.*
 .venv/
 __pycache__/
-node_modules/
-swaps.csv
-reminders.txt
 dist/*.tmp
+node_modules/
+reminders.txt
+swaps.csv
